@@ -1,0 +1,96 @@
+# Smart Safety Vision Configuration File
+
+# Model Configuration
+model:
+  weights: "models/best.pt"
+  confidence_threshold: 0.5
+  iou_threshold: 0.45
+  device: "cpu"  # "cpu" or "cuda" for GPU
+  img_size: 640
+
+# Camera Configuration
+camera:
+  source: 0  # 0 for webcam, video path, or IP camera URL
+  fps: 30
+  resolution:
+    width: 1280
+    height: 720
+  buffer_size: 1
+
+# Detection Classes
+classes:
+  ppe_items:
+    - "helmet"
+    - "vest"
+    - "gloves"
+    - "boots"
+  violations:
+    - "no_helmet"
+    - "no_vest"
+    - "no_gloves"
+  other:
+    - "person"
+
+# Alert Configuration
+alerts:
+  telegram:
+    enabled: true
+    cooldown_seconds: 60  # Minimum time between alerts for same violation
+    send_image: true
+    image_quality: 85
+  
+  sound:
+    enabled: false
+    alert_file: "assets/alert.wav"
+
+# Database Configuration
+database:
+  type: "sqlite"
+  path: "logs/detections.db"
+  save_violation_images: true
+  image_folder: "logs/violations"
+  retention_days: 30  # Auto-delete old records
+
+# Dashboard Configuration
+dashboard:
+  title: "Smart Safety Vision - PPE Monitoring"
+  refresh_interval: 5  # seconds
+  show_live_feed: true
+  max_violations_display: 100
+
+# Detection Rules
+rules:
+  required_ppe:
+    - "helmet"
+    - "vest"
+  
+  violation_threshold: 1  # Number of frames to confirm violation
+  
+  zones:
+    - name: "Workshop Area"
+      required: ["helmet", "vest", "gloves"]
+    - name: "Storage Area"
+      required: ["helmet", "vest"]
+    - name: "Office Area"
+      required: []
+
+# Performance Settings
+performance:
+  skip_frames: 0  # Process every Nth frame (0 = process all)
+  max_detections: 50  # Maximum detections per frame
+  track_objects: true  # Enable object tracking
+  save_annotated_frames: false
+
+# Logging
+logging:
+  level: "INFO"  # DEBUG, INFO, WARNING, ERROR
+  file: "logs/app.log"
+  max_size_mb: 10
+  backup_count: 5
+
+# Advanced Settings
+advanced:
+  auto_restart: true
+  error_recovery: true
+  multi_threading: true
+  gpu_memory_fraction: 0.5

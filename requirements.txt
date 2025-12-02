@@ -1,0 +1,41 @@
+# Core Dependencies
+ultralytics>=8.0.0
+opencv-python>=4.8.0
+numpy>=1.24.0
+Pillow>=10.0.0
+
+# Deep Learning
+torch>=2.0.0
+torchvision>=0.15.0
+
+# Database
+sqlite3-python
+
+# Telegram Integration
+python-telegram-bot>=20.0
+requests>=2.31.0
+
+# Web Dashboard
+streamlit>=1.28.0
+plotly>=5.17.0
+pandas>=2.0.0
+
+# Utilities
+python-dotenv>=1.0.0
+PyYAML>=6.0
+tqdm>=4.66.0
+
+# Image Processing
+opencv-contrib-python>=4.8.0
+
+# Testing
+pytest>=7.4.0
+pytest-cov>=4.1.0
+
+# Optional: For better performance
+# onnxruntime>=1.16.0  # For ONNX model inference
+# openvino>=2023.0.0   # For Intel optimization
+
+# API Server
+fastapi>=0.110.0
+uvicorn[standard]>=0.24.0
